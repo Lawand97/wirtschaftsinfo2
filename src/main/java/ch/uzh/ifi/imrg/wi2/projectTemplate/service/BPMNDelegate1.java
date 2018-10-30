@@ -5,7 +5,7 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-@Named("aServiceDelegate")
+@Named("Getdata")
 public class BPMNDelegate1 implements JavaDelegate {
 
     @Override

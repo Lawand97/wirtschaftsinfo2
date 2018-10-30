@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0xf5n2o" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0xf5n2o" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
   <bpmn:collaboration id="Collaboration_1dj7d7i">
     <bpmn:participant id="Participant_1bq14wy" name="Kunde" processRef="Process_1" />
     <bpmn:participant id="Participant_0vg79jz" name="Ladengeschäft" processRef="Process_0o5y7fr" />
@@ -50,7 +50,7 @@
     <bpmn:messageFlow id="MessageFlow_14eicg8" sourceRef="Task_1pgcd2p" targetRef="Task_0qggmts" />
     <bpmn:messageFlow id="MessageFlow_1vycptr" sourceRef="Task_0qggmts" targetRef="IntermediateThrowEvent_1q0euxx" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" isExecutable="true">
+  <bpmn:process id="Process_1" isExecutable="false">
     <bpmn:laneSet id="LaneSet_0ix1qyo">
       <bpmn:lane id="Lane_1guf8rt" name="Sonstige">
         <bpmn:flowNodeRef>IntermediateThrowEvent_1nhpewg</bpmn:flowNodeRef>
@@ -118,7 +118,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1t7x5iz" name="nein&#10;&#10;" sourceRef="ExclusiveGateway_0gx3sxe" targetRef="ExclusiveGateway_0hrdevj" />
     <bpmn:sequenceFlow id="SequenceFlow_1by5bgp" sourceRef="IntermediateThrowEvent_0syiyx6" targetRef="Task_1pgcd2p" />
     <bpmn:sequenceFlow id="SequenceFlow_0egld2p" name="ja" sourceRef="ExclusiveGateway_0gx3sxe" targetRef="IntermediateThrowEvent_0syiyx6" />
-    <bpmn:sendTask id="Task_1gvk3x9" name="in Geschäft gehen">
+    <bpmn:sendTask id="Task_1gvk3x9" name="in Geschäft gehen" camunda:delegateExpression="">
       <bpmn:incoming>SequenceFlow_00t6tsm</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ausrj3</bpmn:outgoing>
     </bpmn:sendTask>
@@ -511,13 +511,13 @@
         <bpmn:flowNodeRef>Task_176j6nu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0b2havp</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1m13hfr</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>StartEvent_0q29xdz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_13lvj7l</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_0q29xdz</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1dmq8kg" name="Lieferant" />
       <bpmn:lane id="Lane_0rzrtz9" name="Kunde" />
     </bpmn:laneSet>
-    <bpmn:serviceTask id="Task_1f36qzk" name="Daten aus ERP holen">
+    <bpmn:serviceTask id="Task_1f36qzk" name="Daten aus ERP holen" camunda:delegateExpression="#{Getdata}">
       <bpmn:incoming>SequenceFlow_1vjxnz0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_09rf74x</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -532,7 +532,7 @@
           <camunda:formField id="customername" type="string" />
           <camunda:formField id="customerlastname" type="string" />
           <camunda:formField id="address" type="string" />
-          <camunda:formField id="FormField_286ovv4" />
+          <camunda:formField id="FormField_286ovv4" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0bd1s2n</bpmn:incoming>
@@ -566,33 +566,38 @@
     <bpmn:sequenceFlow id="SequenceFlow_03obegv" sourceRef="Task_176j6nu" targetRef="Task_1m13hfr" />
     <bpmn:sequenceFlow id="SequenceFlow_149pl9p" sourceRef="Task_1m13hfr" targetRef="Task_0b2havp" />
     <bpmn:sequenceFlow id="SequenceFlow_1ky5gvk" sourceRef="Task_0b2havp" targetRef="Task_1ncwxfd" />
-    <bpmn:sequenceFlow id="SequenceFlow_106un46" name="Nein" sourceRef="ExclusiveGateway_1gtmi44" targetRef="Task_1d3wctv" />
-    <bpmn:sequenceFlow id="SequenceFlow_1mf2b6h" name="Ja" sourceRef="ExclusiveGateway_1gtmi44" targetRef="ExclusiveGateway_1xl1ig5" />
+    <bpmn:sequenceFlow id="SequenceFlow_106un46" name="Nein" sourceRef="ExclusiveGateway_1gtmi44" targetRef="Task_1d3wctv">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">bb</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1mf2b6h" name="Ja" sourceRef="ExclusiveGateway_1gtmi44" targetRef="ExclusiveGateway_1xl1ig5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">bb</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0j3s0fs" sourceRef="Task_1d3wctv" targetRef="ExclusiveGateway_1xl1ig5" />
     <bpmn:sequenceFlow id="SequenceFlow_0nwdlkm" sourceRef="ExclusiveGateway_1xl1ig5" targetRef="Task_08gz4c9" />
     <bpmn:sequenceFlow id="SequenceFlow_0r4cn22" sourceRef="StartEvent_0q29xdz" targetRef="ExclusiveGateway_13lvj7l" />
-    <bpmn:startEvent id="StartEvent_0q29xdz">
-      <bpmn:outgoing>SequenceFlow_0r4cn22</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_13lvj7l" name="Neukunde?">
       <bpmn:incoming>SequenceFlow_0r4cn22</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bd1s2n</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1vjxnz0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_0bd1s2n" name="Ja" sourceRef="ExclusiveGateway_13lvj7l" targetRef="Task_11hqyit" />
-    <bpmn:sequenceFlow id="SequenceFlow_1vjxnz0" name="Nein" sourceRef="ExclusiveGateway_13lvj7l" targetRef="Task_1f36qzk" />
-    <bpmn:serviceTask id="Task_1ncwxfd" name="Verfügbarkeit prüfen">
+    <bpmn:sequenceFlow id="SequenceFlow_0bd1s2n" name="Ja" sourceRef="ExclusiveGateway_13lvj7l" targetRef="Task_11hqyit">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language=""></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1vjxnz0" name="Nein" sourceRef="ExclusiveGateway_13lvj7l" targetRef="Task_1f36qzk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="2">dw</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Task_1ncwxfd" name="Verfügbarkeit prüfen" camunda:delegateExpression="verfügbarkeit">
       <bpmn:incoming>SequenceFlow_1ky5gvk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_17dh5ox</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_17dh5ox" sourceRef="Task_1ncwxfd" targetRef="ExclusiveGateway_1gtmi44" />
-    <bpmn:serviceTask id="Task_14cs2y7" name="Rechnung erstellen">
+    <bpmn:serviceTask id="Task_14cs2y7" name="Rechnung erstellen" camunda:delegateExpression="rechnung">
       <bpmn:incoming>SequenceFlow_04jt214</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vcpxnb</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_04jt214" sourceRef="Task_08gz4c9" targetRef="Task_14cs2y7" />
     <bpmn:sequenceFlow id="SequenceFlow_0vcpxnb" sourceRef="Task_14cs2y7" targetRef="Task_1l2wdfi" />
-    <bpmn:serviceTask id="Task_1b0ze3f" name="Zahlungsbestatigung erstellen">
+    <bpmn:serviceTask id="Task_1b0ze3f" name="Zahlungsbestatigung erstellen" camunda:delegateExpression="bestätigung">
       <bpmn:incoming>SequenceFlow_1g6vrle</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yb05tg</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -600,7 +605,7 @@
       <bpmn:incoming>SequenceFlow_0yb05tg</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0yb05tg" sourceRef="Task_1b0ze3f" targetRef="EndEvent_0wf1xeb" />
-    <bpmn:serviceTask id="Task_1l2wdfi" name="Rechnung in ERP hinterlegen">
+    <bpmn:serviceTask id="Task_1l2wdfi" name="Rechnung in ERP hinterlegen" camunda:delegateExpression="hinterlegen">
       <bpmn:incoming>SequenceFlow_0vcpxnb</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vxzypv</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -610,7 +615,7 @@
       <bpmn:outgoing>SequenceFlow_106un46</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1mf2b6h</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_1d3wctv" name="Ware nachbestellen">
+    <bpmn:serviceTask id="Task_1d3wctv" name="Ware nachbestellen" camunda:delegateExpression="warebestellen">
       <bpmn:incoming>SequenceFlow_106un46</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0j3s0fs</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -619,15 +624,18 @@
       <bpmn:incoming>SequenceFlow_1mf2b6h</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0nwdlkm</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_08gz4c9" name="Order erstellen und hinterlegen">
+    <bpmn:serviceTask id="Task_08gz4c9" name="Order erstellen und hinterlegen" camunda:delegateExpression="order">
       <bpmn:incoming>SequenceFlow_0nwdlkm</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_04jt214</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1g6vrle" sourceRef="Task_0qggmts" targetRef="Task_1b0ze3f" />
-    <bpmn:serviceTask id="Task_0qggmts" name="Zahlungseingang melden">
+    <bpmn:serviceTask id="Task_0qggmts" name="Zahlungseingang melden" camunda:delegateExpression="zzahlungseingang">
       <bpmn:incoming>SequenceFlow_0vxzypv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1g6vrle</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_0q29xdz">
+      <bpmn:outgoing>SequenceFlow_0r4cn22</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1dj7d7i">
@@ -1409,10 +1417,10 @@
         <di:waypoint x="2557" y="521" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="StartEvent_0q29xdz_di" bpmnElement="StartEvent_0q29xdz">
-        <dc:Bounds x="697" y="1183" width="36" height="36" />
+        <dc:Bounds x="663" y="1183" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0r4cn22_di" bpmnElement="SequenceFlow_0r4cn22">
-        <di:waypoint x="733" y="1201" />
+        <di:waypoint x="699" y="1201" />
         <di:waypoint x="911" y="1201" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_146agmj_di" bpmnElement="SequenceFlow_146agmj">
