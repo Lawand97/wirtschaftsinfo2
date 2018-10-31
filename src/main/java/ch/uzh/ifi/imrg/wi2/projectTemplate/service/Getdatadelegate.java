@@ -5,13 +5,14 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-@Named("Availability")
-public class Availabilitydelegate implements JavaDelegate {
+@Named("Getdata")
+public class Getdatadelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution de) throws Exception {
         Map<String, Object> camVariables = de.getVariables();
-            System.out.println("Verfügbarkeit prüfen");
+            System.out.println("Kontaktdaten holen");
+
 
     }
 }

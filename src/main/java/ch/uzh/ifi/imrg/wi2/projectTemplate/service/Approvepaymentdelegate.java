@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ch.uzh.ifi.imrg.wi2.projectTemplate.service;
 
 import java.util.Map;
@@ -5,8 +10,12 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-@Named("Getdata")
-public class Getdata implements JavaDelegate {
+/**
+ *
+ * @author lmuh
+ */
+@Named("Approvepayment")
+public class Approvepaymentdelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution de) throws Exception {
