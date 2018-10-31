@@ -6,15 +6,13 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 @Named("Getdata")
-public class BPMNDelegate1 implements JavaDelegate {
+public class Getdata implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution de) throws Exception {
         Map<String, Object> camVariables = de.getVariables();
-        for(String k : camVariables.keySet()) {
-            System.out.println("camVariables["+k+"] = " + camVariables.get(k));
-        }
-        
+            System.out.println("Kontaktdaten holen");
+
+
     }
-    
 }
