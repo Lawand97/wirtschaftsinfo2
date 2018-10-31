@@ -553,10 +553,10 @@
     <bpmn:sequenceFlow id="SequenceFlow_149pl9p" sourceRef="Task_1m13hfr" targetRef="Task_0b2havp" />
     <bpmn:sequenceFlow id="SequenceFlow_1ky5gvk" sourceRef="Task_0b2havp" targetRef="Task_1ncwxfd" />
     <bpmn:sequenceFlow id="SequenceFlow_106un46" name="Nein" sourceRef="ExclusiveGateway_1gtmi44" targetRef="Task_1d3wctv">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">bb</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1mf2b6h" name="Ja" sourceRef="ExclusiveGateway_1gtmi44" targetRef="ExclusiveGateway_1xl1ig5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">bb</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0j3s0fs" sourceRef="Task_1d3wctv" targetRef="ExclusiveGateway_1xl1ig5" />
     <bpmn:sequenceFlow id="SequenceFlow_0nwdlkm" sourceRef="ExclusiveGateway_1xl1ig5" targetRef="Task_08gz4c9" />

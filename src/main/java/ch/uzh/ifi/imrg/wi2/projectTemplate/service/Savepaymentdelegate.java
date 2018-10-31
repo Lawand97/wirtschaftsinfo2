@@ -20,7 +20,7 @@ public class Savepaymentdelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution de) throws Exception {
         Map<String, Object> camVariables = de.getVariables();
-            System.out.println("Kontaktdaten holen");
+            System.out.println("Zahlungsbestätigung hinterlegt");
 
 
     }
